@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Presentación de Proyecto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .integrantes {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .integrante {
+            text-align: center;
+            margin: 10px;
+        }
+        .integrante img {
+            max-width: 200px;
+            border-radius: 50%;
+        }
+        .proyecto-fotos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .proyecto-fotos img {
+            max-width: 300px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Madurez de la fruta</h1>
+        <h2>Materia: [Programacion superior]</h2>
+    </div>
+
+    <div class="section">
+        <h3>Información General</h3>
+        <p><strong>Docente:</strong> [Sergio Hernan Valenzuela Camara]</p>
+        <p><strong>Lugar:</strong> [Universidad Catolica Boliviana Cochabamba]</p>
+        <p><strong>Fecha:</strong> [4/12/2024]</p>
+    </div>
+
+    <div class="section">
+        <h3>Integrantes del Grupo</h3>
+        <div class="integrantes">
+            <div class="integrante">
+                <img src="{{ url_for('static', filename='yo.jpeg')}}" alt="Integrante 1">
+                <p>Elvin Pablo Hidalgo Camacho</p>
+            </div>
+            <div class="integrante">
+                <img src="{{ url_for('static', filename='gabo.jpeg')}}" alt="Integrante 2">
+                <p>Josue Gabriel Torrico Arze</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Descripción del Proyecto</h3>
+        <p>Este proyecto desarrolla un sistema basado en visión artificial y control de hardware que permite detectar frutas no maduras en tiempo real utilizando una Raspberry Pi 3 Model B+. La detección se realiza a través
+        de procesamiento de imágenes, identificando colores específicos que indican inmadurez (como tonos verdes). El sistema emplea dos LEDs como indicadores visuales del estado de detección:</p>
+
+        -LED 1 se enciende cuando se detectan frutas no maduras.</p>
+        -LED 2 se enciende cuando no se detectan frutas no maduras.</p>
+        El diseño busca integrar tecnologías de bajo costo con técnicas avanzadas de procesamiento de imágenes, creando una solución accesible y educativa que combina la electrónica básica con la programación
+        y la inteligencia artificial aplicada.</p>
+
+        Objetivos :</p>
+
+        -Detección precisa de frutas maduras y no maduras.</p>
+
+        -Implementar los LEDs que proporcione una retroalimentación inmediata.</p>
+
+        -Facilidad de uso e implementacion.</p>
+        Marco teorico:</p>
+        La visión por computadora es una rama de la inteligencia artificial que permite a las máquinas interpretar y analizar imágenes digitales. En este proyecto, se utiliza
+        el procesamiento de imágenes para segmentar colores específicos y detectar objetos en tiempo real. El espacio de color HSV es especialmente adecuado para este propósito
+        porque separa el matiz (Hue), la saturación (Saturation) y el brillo (Value), lo que facilita identificar colores independientemente de variaciones en la iluminación.
+        Esto es crucial en aplicaciones como la detección de frutas, donde los colores de los objetos son un indicador clave de su estado.</p>
+
+        La segmentación de colores implica aislar regiones de una imagen que comparten características de color específicas.
+        Este proceso comienza con la conversión de la imagen al espacio HSV, seguido de la creación de una máscara binaria que separa los píxeles relevantes
+        (en este caso, verdes) del resto. Una vez creada la máscara, se detectan los contornos para identificar las formas de los objetos dentro de las regiones segmentadas.
+        Los contornos son útiles para calcular propiedades geométricas como el centroide, el área y la orientación de los objetos.</p>
+
+        La Raspberry Pi actúa como el núcleo del sistema, combinando la capacidad de procesar imágenes con el control de hardware externo, como LEDs.
+        Los LEDs proporcionan una interfaz de usuario intuitiva basada en principios de retroalimentación visual. En un sistema binario como este, el
+        encendido de un LED específico indica el estado del sistema (fruta detectada o no detectada), lo que es un ejemplo simple pero eficaz de interacción
+        entre software y hardware.</p>
+        Los pines GPIO de la Raspberry Pi son una herramienta poderosa para interactuar con componentes electrónicos. En este proyecto, los GPIO controlan LEDs
+        que actúan como indicadores visuales. Los pines pueden configurarse para enviar señales digitales (HIGH o LOW), lo que permite activar o desactivar dispositivos
+        externos. Este diseño refleja principios básicos de sistemas embebidos, donde el software controla hardware físico para realizar tareas específicas.</p>
+        Metodologia:</p>
+        1.Configuración de la Raspberry Pi para capturar video en tiempo real mediante una cámara conectada.</p>
+        2.Conexión de los LEDs a los pines GPIO, asignando cada LED a un estado específico.</p>
+        3.Procesamiento de Imágenes.</p>
+        4.Captura de video con OpenCV.</p>
+        5.Conversión de cada fotograma al espacio de color HSV, que permite identificar rangos de color con mayor precisión.</p>
+        6.Aplicación de un rango de color predefinido para generar una máscara binaria que destaque las áreas verdes.</p>
+        7.Análizar de contornos para localizar frutas no maduras.</p>
+        8.Si se detecta si la fruta esta madura prendera su respectivo led.</p>
+
+        Concluciones:</p>
+        El proyecto logra su objetivo principal de identificar frutas no maduras y proporcionar retroalimentación visual clara mediante LEDs.
+        La arquitectura del sistema es modular, permitiendo su ampliación con algoritmos más avanzados o sensores adicionales para un análisis
+        más completo de las frutas.
+        </p>
+        <div class="proyecto-fotos">
+            <img src="{{ url_for('static', filename='circuito1.jpeg')}}" alt="Foto Proyecto 1">
+            <img src="{{ url_for('static', filename='circuito2.jpeg')}}" alt="Foto Proyecto 2">
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Materiales y Recursos</h3>
+        <ul>
+            <li>Raspberry Pi 3</li>
+            <li>Camara</li>
+            <li>Protoboard</li>
+            <li>Leds</li>
+            <li>Cables</li>
+        </ul>
+    </div>
+</body>
+</html>
